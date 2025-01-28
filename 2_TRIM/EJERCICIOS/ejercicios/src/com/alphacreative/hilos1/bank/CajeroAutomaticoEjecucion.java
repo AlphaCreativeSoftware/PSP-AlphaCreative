@@ -1,6 +1,6 @@
 package com.alphacreative.hilos1.bank;
 
-public class HiloCajeroAutomatico {
+public class CajeroAutomaticoEjecucion {
 
     public static void main(String[] args)
     {

@@ -10,8 +10,8 @@ public class HiloParImparEjecutar extends Thread{
         Thread t1 = new Thread(hiloPar);
         Thread t2 = new Thread(hiloImpar);
 
-        t1.setPriority(MIN_PRIORITY); //MINIMA PRIORIDAD PARA QUE SE VEAN DESPUES DE LOS PARES
-        t2.setPriority(MAX_PRIORITY); //MAXIMA PRORIEDAD PARA QUE SE VEAN PRIMERO LOS IMPARES
+        /*t1.setPriority(MIN_PRIORITY); //MINIMA PRIORIDAD PARA QUE SE VEAN DESPUES DE LOS PARES
+        t2.setPriority(MAX_PRIORITY); //MAXIMA PRORIEDAD PARA QUE SE VEAN PRIMERO LOS IMPARES*/
 
         t2.start();
         
