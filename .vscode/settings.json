@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "2_TRIM\\EJERCICIOS\\ejercicios\\src"
+    ],
+    "java.project.referencedLibraries": [
+        "2_TRIM\\EJERCICIOS\\ejercicios\\libs\\jnativehook-2.2.2.jar"
+    ]
+}
