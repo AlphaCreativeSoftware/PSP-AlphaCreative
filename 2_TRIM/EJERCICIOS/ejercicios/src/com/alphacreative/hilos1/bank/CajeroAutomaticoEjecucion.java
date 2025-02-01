@@ -1,5 +1,4 @@
 package com.alphacreative.hilos1.bank;
-import com.github.kwhat.jnativehook.keyboard.*;
 public class CajeroAutomaticoEjecucion {
 
     public static void main(String[] args)
@@ -27,7 +26,5 @@ public class CajeroAutomaticoEjecucion {
         t3.start();
         t4.start();
         t5.start();
-
-       
     }
 }
