@@ -1,10 +1,10 @@
-package com.alphacreative.sockets.testeos;
+package com.alphacreative.sockets.tcp;
 
 import java.io.*;
 import java.net.*;
 
 public class Cliente  {
-  public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 	String Host = "192.168.1.243";
 	int Puerto = 7777; //puerto remoto
     

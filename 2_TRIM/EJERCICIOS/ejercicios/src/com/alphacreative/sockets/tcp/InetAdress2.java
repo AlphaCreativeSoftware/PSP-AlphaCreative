@@ -1,4 +1,4 @@
-package com.alphacreative.sockets.testeos;
+package com.alphacreative.sockets.tcp;
 import java.net.*;
 
 public class InetAdress2 {

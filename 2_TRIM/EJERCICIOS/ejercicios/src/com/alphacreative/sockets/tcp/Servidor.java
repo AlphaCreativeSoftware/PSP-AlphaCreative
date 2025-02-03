@@ -1,4 +1,4 @@
-package com.alphacreative.sockets.testeos;
+package com.alphacreative.sockets.tcp;
 
 import java.io.*;
 import java.net.*;
