@@ -6,14 +6,15 @@ import java.net.InetAddress;
 public class UDP_Cliente {
   public static void main(String[] argv) throws Exception {
     
-    InetAddress destino = InetAddress.getLocalHost();
+    //InetAddress destino = InetAddress.getLocalHost();
+    InetAddress destino = InetAddress.getByAddress(new byte[]{(byte)192, (byte)168, (byte)114, (byte)116});
     int port = 12345; //puerto al que envio el datagrama
-    byte[] mensaje = new byte[1024]; //Array almacenar mensaje  
+    byte[] mensaje = new byte[2048]; //Array almacenar mensaje  
     
-    String Saludo="Enviando Saludos !!";
+    String Saludo="Hola soy Mikael desde Máquina HOST";
     mensaje = Saludo.getBytes();  
     
-    //Construcción del Datagrama 
+    //Construcción del Datagrama
     DatagramPacket envio = new DatagramPacket (mensaje, mensaje.length, destino, port);
     DatagramSocket socket = new DatagramSocket(34567); //Puerto local
     
@@ -25,6 +26,7 @@ public class UDP_Cliente {
 
     //Envío del datagrama
     socket.send(envio);
+    
     //Cierre del socket
     socket.close(); 
   }

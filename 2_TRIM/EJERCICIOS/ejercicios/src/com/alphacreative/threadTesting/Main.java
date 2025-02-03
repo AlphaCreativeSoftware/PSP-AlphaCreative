@@ -10,12 +10,10 @@ public class Main {
         HiloIngresor hiloIngresor = new HiloIngresor(gestor);
         HiloExtractor hiloExtractor = new HiloExtractor(gestor);
         HiloLector hiloLector = new HiloLector(gestor);
-        
-        hiloIngresor.start();
-        WaitForEnd(hiloIngresor);
-        hiloLector.start();
-        WaitForEnd(hiloLector);
         hiloExtractor.start();
+        hiloIngresor.start();
+        hiloLector.start();
+        
     }
 
 }
@@ -29,9 +27,10 @@ class HiloExtractor extends Thread
     }
     @Override
     public void run() {
-        System.out.println("Hilo Extractor");
+    
         synchronized(gestor)
         {
+            System.out.println("Hilo Extractor");
             for (int i = gestor.getNumeros().size() - 1; i >= 0; i--) {
                 gestor.removeAt(i);
             }
