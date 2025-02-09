@@ -27,14 +27,12 @@ class HiloExtractor extends Thread
     }
     @Override
     public void run() {
-    
-        synchronized(gestor)
-        {
-            System.out.println("Hilo Extractor");
-            for (int i = gestor.getNumeros().size() - 1; i >= 0; i--) {
-                gestor.removeAt(i);
-            }
+
+        System.out.println("Hilo Extractor");
+        for (int i = gestor.getNumeros().size() - 1; i >= 0; i--) {
+            gestor.removeAt(i);
         }
+        
     }
 }
 

@@ -9,33 +9,20 @@ public class HiloSumasRestasEjecutar {
         Thread hiloResta4 = new Thread(new HiloSumasRestas(1, "-"), "HiloResta4");
         
         hiloSuma1.start();
-
-
-        try {
-            hiloSuma1.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        hiloResta2.start();
         hiloSuma3.start();
-        try
-        {
-            hiloSuma3.join();
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
         hiloResta4.start();
-        
 
         try
         {
+            hiloSuma1.join();
+            hiloResta2.join();
+            hiloSuma3.join();
             hiloResta4.join();
-            hiloResta2.start();
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            
         }
         
     }
