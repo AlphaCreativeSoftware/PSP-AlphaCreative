@@ -23,7 +23,7 @@ public class Cliente2_TCP  {
 			System.out.println("Intentando reconectar con el servidor en el puerto " + Puerto);
 			if(i == 3)
 			{
-				System.out.println("No se pudo conectar, saliendo de Cliente(1)...");
+				System.out.println("No se pudo conectar, saliendo de Cliente(2)...");
 				return;
 			}
 		}
