@@ -7,13 +7,28 @@ public class Cliente2_TCP  {
 	Scanner in = new Scanner(System.in);
 
 	String Host = InetAddress.getLocalHost().getHostAddress();
-	int Puerto = 6666;//puerto remoto	
+	int Puerto = 6667;//puerto remoto	
 	
 	System.out.println("Cliente(2) Iniciado....");
-	Socket Cliente = new Socket(Host, Puerto);
-    System.out.println("Cliente(2) Conectado con Servidor....");
-
-    	
+	Socket Cliente = null;
+	for (int i=1; i<= 3; i++)
+	{
+		try
+		{
+			Cliente = new Socket(Host, Puerto);
+			break;
+		}
+		catch (IOException e)
+		{
+			System.out.println("Intentando reconectar con el servidor en el puerto " + Puerto);
+			if(i == 3)
+			{
+				System.out.println("No se pudo conectar, saliendo de Cliente(1)...");
+				return;
+			}
+		}
+	}
+	System.out.println("Cliente(2) Conectado con Servidor....");
 	// Creación flujo de entrada desde el servidor
     System.out.println("Esperando a recibir el numero enviado por Cliente(1) al servidor....");
 	DataInputStream flujoEntrada = new  DataInputStream(Cliente.getInputStream());

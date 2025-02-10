@@ -10,7 +10,24 @@ public class Cliente1_TCP  {
 	int Puerto = 6666;//puerto remoto	
 	
 	System.out.println("Cliente(1) Iniciado....");
-	Socket cliente = new Socket(Host, Puerto);
+	Socket cliente = null;
+	for (int i=1; i<= 3; i++)
+	{
+		try
+		{
+			cliente = new Socket(Host, Puerto);
+			break;
+		}
+		catch (IOException e)
+		{
+			System.out.println("Intentando reconectar con el servidor en el puerto " + Puerto);
+			if(i == 3)
+			{
+				System.out.println("No se pudo conectar, saliendo de Cliente(1)...");
+				return;
+			}
+		}
+	}
 	System.out.println("Cliente(1) Conectado con Servidor....");
 
 	// Creación flujo de salida hacia el servidor
