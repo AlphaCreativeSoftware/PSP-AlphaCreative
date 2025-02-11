@@ -1,29 +1,27 @@
-package com.alphacreative.hilos3;
+package com.alphacreative.hilos3.test2;
 
 import java.util.Random;
 
-public class Productor extends Thread{
+public class Productor extends Thread {
     private Deposito deposito;
-
+    
     public Productor(Deposito deposito) {
         this.deposito = deposito;
     }
 
     @Override
     public void run() {
-        for(int i = 0; i < 15; i++) {
-            
-            int randomNumber = randomNumber(0,1000);
-            deposito.addFuel(randomNumber, false);
-            System.out.println("(Productor) Deposito llenado con " + randomNumber + " litros");
+        for (int i = 0; i < 15; i++) {
+            int fuel = new Random().nextInt(751) + 250;
+            deposito.addFuel(fuel);
             try {
-                sleep(randomNumber(250,1000));
-            } catch (Exception e) {
+                sleep(randomNumber(250, 500));
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }
     }
 
-    //FUNCIONES AUXILIARES
     private static int randomNumber(int min, int max) {
         if (min > max) {
             int tmin = min, tmax = max;
@@ -33,5 +31,4 @@ public class Productor extends Thread{
         Random random = new Random();
         return random.nextInt((max - min) + 1) + min;
     }
-
 }
