@@ -12,7 +12,14 @@ public class Productor extends Thread {
     @Override
     public void run() {
         for (int i = 0; i < 15; i++) {
-            int fuel = new Random().nextInt(751) + 250;
+            while (deposito.getQueue().isEmpty()) {
+                try {
+                    wait();
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+            }
+            int fuel = randomNumber(0, 1000);
             deposito.addFuel(fuel);
             try {
                 sleep(randomNumber(250, 500));

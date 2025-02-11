@@ -39,8 +39,12 @@ public class Deposito {
         int fuel = tanque; // Cada camión carga hasta 1000 litros
         tanque -= fuel;
         camion.addFuel(fuel);
-        System.out.println("(Camion " + camion.getId() + ") ha cargado " + fuel + " litros. Total en deposito: " + tanque + " litros");
+        System.out.println("(Camion " + camion.ID() + ") ha cargado " + fuel + " litros. Total en deposito: " + tanque + " litros");
         colaCamiones.poll();
         notifyAll();
+    }
+
+    public synchronized Queue<Camion> getQueue() {
+        return this.colaCamiones;
     }
 }
