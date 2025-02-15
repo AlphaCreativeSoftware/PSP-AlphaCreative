@@ -1,39 +1,54 @@
-import java.io.*;
-import java.net.*;
-import java.util.Scanner;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
-public class ServidorUDP {
-    private static final int PUERTO = 6666;
+public class ServidorUDP
+{
+    public static void main(String[] args) throws IOException {
+        System.out.println("--- Servidor UDP ---");
+        DatagramSocket socket_c1 = new DatagramSocket(5000); //Abrimos un socket para el servidor en el puerto 5000
+        byte[] buffer = new byte[1024];
+        System.out.println("Servidor ejecutado en el puerto (5000)...");
 
-    public static void main(String[] args) {
-        try (DatagramSocket servidor = new DatagramSocket(PUERTO))
-        {
-            System.out.println("Servidor UDP esperando conexiones...");
-            
-            byte[] buffer = new byte[1024];
-            DatagramPacket paqueteEntrada = new DatagramPacket(buffer, buffer.length);
-            servidor.receive(paqueteEntrada);
-            String mensajeRecibido = new String(paqueteEntrada.getData(), 0, paqueteEntrada.getLength()).trim();
-            int numeroRecibido = Integer.parseInt(mensajeRecibido);
-            System.out.println("Número recibido de Cliente 1: " + numeroRecibido);
+        //CLIENTE 1
+        //Recibir datos
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+        socket_c1.receive(packet);
+        String numberStr = new String(packet.getData(), 0, packet.getLength());
+        int number = Integer.parseInt(numberStr);
+        System.out.println("El cliente envió: " + numberStr);
+        
+        //Capturamos los datos del Cliente1
+        InetAddress addressCliente1 = packet.getAddress();
+        int portCliente1 = packet.getPort();
 
-            InetAddress direccionCliente2 = InetAddress.getLocalHost();
-            DatagramPacket paqueteSalida = new DatagramPacket(mensajeRecibido.getBytes(), mensajeRecibido.length(), direccionCliente2, 6667);
-            servidor.send(paqueteSalida);
-            System.out.println("Número enviado a Cliente 2");
 
-            servidor.receive(paqueteEntrada);
-            String numeroProcesadoStr = new String(paqueteEntrada.getData(), 0, paqueteEntrada.getLength()).trim();
-            int numeroProcesado = Integer.parseInt(numeroProcesadoStr);
-            System.out.println("Número procesado recibido de Cliente 2: " + numeroProcesado);
+        //CLIENTE 2
+        //Enviamos los datos a cliente 2
+        DatagramSocket socket_c2 = new DatagramSocket(5001); //Abrimos un socket para el servidor CON CLIENTE 2 en el puerto 5001
+        
+        InetAddress addressCliente2 = InetAddress.getByName("localhost");
+        int portCliente2 = 6002;
+        DatagramPacket packetToClient2 = new DatagramPacket(numberStr.getBytes(), numberStr.length(), addressCliente2, portCliente2);
+        socket_c2.send(packetToClient2);
+        System.out.println("Número enviado a Cliente 2");
 
-            DatagramPacket paqueteSalida2 = new DatagramPacket(numeroProcesadoStr.getBytes(), numeroProcesadoStr.length(), paqueteEntrada.getAddress(), 6668);
-            servidor.send(paqueteSalida2);
-            System.out.println("Número procesado enviado a Cliente 1");
-        }
-        catch (IOException e)
-        {
-            System.err.println("Error en el servidor: " + e.getMessage());
-        }
+        //Recibimos los datos de cliente2
+        DatagramPacket packetFromClient2 = new DatagramPacket(buffer, buffer.length);
+        socket_c2.receive(packetFromClient2);
+        String resultStr = new String(packetFromClient2.getData(), 0, packetFromClient2.getLength());
+        System.out.println("Factorial recibido de Cliente2: " + resultStr);
+
+        //Enviamos factorial a cliente 1
+        DatagramPacket packetToClient1 = new DatagramPacket(resultStr.getBytes(), resultStr.length(), addressCliente1, portCliente1);
+        socket_c2.send(packetToClient1);
+        System.out.println("Factorial enviado a Cliente 1... ");
+
+
+        socket_c1.close();
+        socket_c2.close();
+
     }
+    
 }

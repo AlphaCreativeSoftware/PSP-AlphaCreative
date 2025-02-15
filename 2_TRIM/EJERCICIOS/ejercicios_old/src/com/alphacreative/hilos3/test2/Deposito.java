@@ -43,7 +43,6 @@ public class Deposito {
         colaCamiones.poll();
         notifyAll();
     }
-
     public synchronized Queue<Camion> getQueue() {
         return this.colaCamiones;
     }
