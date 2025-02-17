@@ -13,7 +13,7 @@ public class Caja {
     }
     public synchronized void atenderCliente(Cliente cliente) {
         colaClientes.add(cliente);
-        while (colaClientes.peek() != cliente) {
+        while (colaClientes.peek() != cliente || !disponible) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -27,4 +27,5 @@ public class Caja {
     public synchronized Queue<Cliente> getQueue() {
         return this.colaClientes;
     }
+    public synchronized void SetDisponible(boolean disponible) { this.disponible = disponible; }
 }

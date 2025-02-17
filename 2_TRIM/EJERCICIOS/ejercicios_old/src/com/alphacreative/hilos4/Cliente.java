@@ -11,8 +11,14 @@ public class Cliente extends Thread {
     public void run() {
         Random random = new Random();
         Caja cajaSeleccionada = cajas[random.nextInt(cajas.length)];
+        cajaSeleccionada.SetDisponible(false);
         cajaSeleccionada.atenderCliente(this);
-        System.out.println("Cliente " + id + " esperando en la cola.");
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
+        cajaSeleccionada.SetDisponible(true);
+        
     }
 
     public int getClientID()
