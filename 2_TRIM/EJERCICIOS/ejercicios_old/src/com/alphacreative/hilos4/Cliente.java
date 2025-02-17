@@ -12,12 +12,10 @@ public class Cliente extends Thread {
         Random random = new Random();
         Caja cajaSeleccionada = cajas[random.nextInt(cajas.length)];
         cajaSeleccionada.atenderCliente(this);
-        cajaSeleccionada.SetDisponible(false);
         try {
             sleep(1000);
         } catch (Exception e) {
         }
-        cajaSeleccionada.SetDisponible(true);
         
     }
 

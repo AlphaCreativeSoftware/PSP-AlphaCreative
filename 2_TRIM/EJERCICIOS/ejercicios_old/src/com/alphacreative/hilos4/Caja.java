@@ -21,6 +21,11 @@ public class Caja {
             }
         }
         System.out.println("(Caja("+ id +") atendió a " + " Cliente("+ cliente.getClientID() + ")");
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
         colaClientes.poll();
         notifyAll();
     }
