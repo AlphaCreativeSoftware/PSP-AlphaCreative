@@ -20,17 +20,25 @@ public class Caja {
                 Thread.currentThread().interrupt();
             }
         }
+        disponible = false;
         System.out.println("(Caja("+ id +") atendió a " + " Cliente("+ cliente.getClientID() + ")");
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
         colaClientes.poll();
-        notifyAll();
+        disponible = false;
+        notify();
+    }
+    public synchronized void liberarCaja()
+    {
+        while (disponible){
+    	    try {
+    	          wait();
+    	    } catch (InterruptedException e) { }
+    	  }
+          disponible = true;
+          notify();
+
     }
     public synchronized Queue<Cliente> getQueue() {
         return this.colaClientes;
     }
-    public synchronized void SetDisponible(boolean disponible) { this.disponible = disponible; }
+    public synchronized boolean Disponible() { return this.disponible; }
 }

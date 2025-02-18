@@ -11,11 +11,18 @@ public class Cliente extends Thread {
     public void run() {
         Random random = new Random();
         Caja cajaSeleccionada = cajas[random.nextInt(cajas.length)];
+        while(cajaSeleccionada.Disponible() == false) {
+            try {
+                cajaSeleccionada = cajas[random.nextInt(cajas.length)];
+            } catch (Exception e) {
+            }
+        }
         cajaSeleccionada.atenderCliente(this);
         try {
             sleep(1000);
         } catch (Exception e) {
         }
+        cajaSeleccionada.liberarCaja();
         
     }
 
