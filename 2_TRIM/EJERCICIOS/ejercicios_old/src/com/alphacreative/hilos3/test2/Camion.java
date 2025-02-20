@@ -25,7 +25,7 @@ public class Camion extends Thread {
         for (int i = 0; i < 5; i++) {
             deposito.transferFuel(this);
             try {
-                sleep(randomNumber(250, 1000));
+                sleep(randomNumber(250, 2000));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

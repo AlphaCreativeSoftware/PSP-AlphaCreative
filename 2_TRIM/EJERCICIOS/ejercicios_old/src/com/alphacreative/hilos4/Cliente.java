@@ -11,21 +11,15 @@ public class Cliente extends Thread {
     public void run() {
         Random random = new Random();
         Caja cajaSeleccionada = cajas[random.nextInt(cajas.length)];
-        while(cajaSeleccionada.Disponible() == false) {
-            try {
-                cajaSeleccionada = cajas[random.nextInt(cajas.length)];
-            } catch (Exception e) {
-            }
-        }
         cajaSeleccionada.atenderCliente(this);
+        System.out.println("Cliente (" + id + ") ha entrado en caja");
         try {
             sleep(1000);
         } catch (Exception e) {
         }
         cajaSeleccionada.liberarCaja();
-        
+        System.out.println("Cliente (" + id + ") ha salido de la caja");
     }
-
     public int getClientID()
     {
         return this.id;
